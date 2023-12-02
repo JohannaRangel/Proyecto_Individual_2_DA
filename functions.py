@@ -79,76 +79,134 @@ def analizar_valores_sd(dataframe):
 
 def data_cleaning(df, drop_duplicates=False, drop_na=False, fill_na=None, convert_to_datetime=None, uppercase_columns=None,
                   lowercase_columns=None, titlecase_columns=None, strip_spaces=True, rename_columns=None, drop_columns=None,
-                  categorize_columns=None, replace_values=None, new_columns=None, convert_date_columns=None):
+                  categorize_columns=None, replace_values=None, new_columns=None, convert_date_columns=None, 
+                  convert_to_int_columns=None, convert_to_float=None):
     """
     Realiza el proceso de limpieza de datos en un DataFrame.
 
     Parámetros:
     - df (pd.DataFrame): El DataFrame que se va a limpiar.
+    
     - drop_duplicates (bool): Elimina duplicados si es True.
+      Ejemplo: cleaned_df = data_cleaning(df_tu_data_frame, drop_duplicates=True)
+    
     - drop_na (bool): Elimina filas con valores nulos si es True.
+      Ejemplo: cleaned_df = data_cleaning(df_tu_data_frame, drop_na=True)
+
     - fill_na (dict): Un diccionario donde las claves son los nombres de columnas y los valores son valores para rellenar los nulos.
+      Ejemplo: fill_na_dict = {'gravedad': 'leve'}
+               cleaned_df = data_cleaning(df_tu_data_frame, fill_na=fill_na_dict)
+        
     - convert_to_datetime (list): Lista de columnas para convertir a tipo de dato datetime.
+      Ejemplo: columns_to_convert = ['fecha', 'hora']
+               cleaned_df = data_cleaning(df_tu_data_frame, convert_to_datetime=columns_to_convert)
+
     - uppercase_columns (list): Lista de columnas para convertir a mayúsculas.
+      Ejemplo: columns_to_uppercase = ['nombre', 'apellido']
+               cleaned_df = data_cleaning(df_tu_data_frame, uppercase_columns=columns_to_uppercase)
+
     - lowercase_columns (list): Lista de columnas para convertir a minúsculas.
+      Ejemplo: columns_to_lowercase = ['Ciudad', 'Pais']
+               cleaned_df = data_cleaning(df_tu_data_frame, lowercase_columns=columns_to_lowercase)
+
     - titlecase_columns (list): Lista de columnas para convertir a formato de título (primera letra en mayúscula, resto en minúscula).
+      Ejemplo: columns_to_titlecase = ['titulo', 'categoria']
+               cleaned_df = data_cleaning(df_tu_data_frame, titlecase_columns=columns_to_titlecase)
+            
     - strip_spaces (bool): Elimina espacios en blanco alrededor de los valores de las celdas si es True.
+      Ejemplo: cleaned_df = data_cleaning(df_tu_data_frame, strip_spaces=True)
+
     - rename_columns (dict): Un diccionario donde las claves son los nombres de las columnas actuales y los valores son los nuevos nombres.
+      Ejemplo: rename_dict = {'Vieja_Columna': 'Nueva_Columna'}
+               cleaned_df = data_cleaning(df_tu_data_frame, rename_columns=rename_dict)
+    
     - drop_columns (list): Lista de columnas para eliminar.
+      Ejemplo: columns_to_drop = ['columna1', 'columna2']
+               cleaned_df = data_cleaning(df_tu_data_frame, drop_columns=columns_to_drop)
+        
     - categorize_columns (list): Lista de columnas para convertir a tipo de dato categoría.
+      Ejemplo: columns_to_categorize = ['categoria1', 'categoria2']
+               cleaned_df = data_cleaning(df_tu_data_frame, categorize_columns=columns_to_categorize)
+        
     - replace_values (dict): Un diccionario donde las claves son los nombres de las columnas y los valores son diccionarios de reemplazo.
+      Ejemplo: replace_dict = {'columna1': {'Antiguo1': 'Nuevo1', 'Antiguo2': 'Nuevo2'}}
+               cleaned_df = data_cleaning(df_tu_data_frame, replace_values=replace_dict)
+
     - new_columns (dict): Un diccionario donde las claves son los nombres de las nuevas columnas y los valores son valores para esas columnas.
-    - convert_date_columns (list): Lista de columnas para convertir a tipo de dato fecha.
+      Ejemplo: new_columns_dict = {'nueva_columna': 0}
+               cleaned_df = data_cleaning(df_tu_data_frame, new_columns=new_columns_dict)
+ 
+    - convert_date_columns (dict): Un diccionario donde las claves son los nombres de las columnas y los valores son los formatos de fecha.
+      Ejemplo: date_columns_dict = {'fecha': '%Y-%m-%d', 'hora': '%H:%M:%S'}
+               cleaned_df = data_cleaning(df_tu_data_frame, convert_date_columns=date_columns_dict)
 
-
+    - convert_to_int_columns (list): Lista de columnas para convertir a tipo de dato entero.
+      Ejemplo: columns_to_int = ['columna1', 'columna2']
+               cleaned_df = data_cleaning(df_tu_data_frame, convert_to_int_columns=columns_to_int)
+    
+    - convert_to_float (list): Lista de columnas para convertir a tipo de dato float.
+      Ejemplo: columns_to_float = ['columna1', 'columna2']
+               cleaned_df = data_cleaning(df_tu_data_frame, convert_to_float=columns_to_float)          
+            
     Retorna:
     pd.DataFrame: El DataFrame limpio.
     """
+
     cleaned_df = df.copy()
 
     # Eliminar duplicados
     if drop_duplicates:
         cleaned_df.drop_duplicates(inplace=True)
+        
 
     # Eliminar filas con valores nulos
     if drop_na:
         cleaned_df.dropna(inplace=True)
+        
 
     # Rellenar valores nulos
     if fill_na:
         cleaned_df.fillna(fill_na, inplace=True)
 
+        
     # Convertir columnas a tipo datetime
     if convert_to_datetime:
         for column in convert_to_datetime:
             cleaned_df[column] = pd.to_datetime(cleaned_df[column], errors='coerce')
+            
 
     # Convertir columnas a mayúsculas
     if uppercase_columns:
         for column in uppercase_columns:
             cleaned_df[column] = cleaned_df[column].str.upper()
+            
 
     # Convertir columnas a minúsculas
     if lowercase_columns:
         for column in lowercase_columns:
             cleaned_df[column] = cleaned_df[column].str.lower()
+        
 
     # Convertir columnas a formato de título
     if titlecase_columns:
         for column in titlecase_columns:
             cleaned_df[column] = cleaned_df[column].str.title()
             
+            
     # Tratar columnas con espacios
     if strip_spaces:
         cleaned_df = cleaned_df.applymap(lambda x: x.strip() if isinstance(x, str) else x)
+        
 
     # Renombrar columnas
     if rename_columns:
         cleaned_df.rename(columns=rename_columns, inplace=True)
+        
     
     # Eliminar columnas
     if drop_columns:
         cleaned_df.drop(columns=drop_columns, inplace=True)
+        
         
     # Categorizar columnas
     if categorize_columns:
@@ -157,24 +215,37 @@ def data_cleaning(df, drop_duplicates=False, drop_na=False, fill_na=None, conver
                 cleaned_df[column] = cleaned_df[column].astype('category')
             else:
                 print(f"La columna '{column}' no existe en el DataFrame.")
+                
 
     # Reemplazar valores en columnas
     if replace_values:
         for column, replacements in replace_values.items():
             cleaned_df[column].replace(replacements, inplace=True)
+            
 
     # Agregar nuevas columnas
     if new_columns:
         for column, value in new_columns.items():
             cleaned_df[column] = value
-    
+ 
+
     # Convertir columnas de fecha con formato específico
     if convert_date_columns:
         for column, date_format in convert_date_columns.items():
             cleaned_df[column] = pd.to_datetime(cleaned_df[column], format=date_format, errors='coerce')
-    #convert_date_columns = {'fecha': '%Y-%m-%d', 'otra_fecha': '%Y-%m-%d %H:%M:%S'}
 
+    
+    # Convertir columnas a tipo de dato entero
+    if convert_to_int_columns:
+        for column in convert_to_int_columns:
+            cleaned_df[column] = pd.to_numeric(cleaned_df[column], errors='coerce').astype('Int64')
+    
+    
+    # Convertir columnas a tipo float
+    if convert_to_float:
+        for column in convert_to_float:
+            cleaned_df[column] = cleaned_df[column].astype(float)
+        
+            
     return cleaned_df
-
-#mi_dataframe_limpiado = data_cleaning(mi_dataframe, drop_duplicates=True, drop_na=True, fill_na={'columna1': 0, 'columna2': 'valor'}, convert_to_datetime=['fecha'], uppercase_columns=['nombre'])
 

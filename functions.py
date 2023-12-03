@@ -7,11 +7,13 @@
 
 # ## Importar Librerías
 
-# In[ ]:
+# In[2]:
 
 
 import pandas as pd
 import numpy as np
+import mysql.connector
+from sqlalchemy import create_engine
 
 
 # ## Funciones
@@ -74,13 +76,13 @@ def analizar_valores_sd(dataframe):
     return resultados_con_sd
 
 
-# In[ ]:
+# In[1]:
 
 
 def data_cleaning(df, drop_duplicates=False, drop_na=False, fill_na=None, convert_to_datetime=None, uppercase_columns=None,
                   lowercase_columns=None, titlecase_columns=None, strip_spaces=True, rename_columns=None, drop_columns=None,
                   categorize_columns=None, replace_values=None, new_columns=None, convert_date_columns=None, 
-                  convert_to_int_columns=None, convert_to_float=None):
+                  convert_to_int_columns=None, convert_to_float=None, new_columns2=None):
     """
     Realiza el proceso de limpieza de datos en un DataFrame.
 
@@ -135,6 +137,12 @@ def data_cleaning(df, drop_duplicates=False, drop_na=False, fill_na=None, conver
     - new_columns (dict): Un diccionario donde las claves son los nombres de las nuevas columnas y los valores son valores para esas columnas.
       Ejemplo: new_columns_dict = {'nueva_columna': 0}
                cleaned_df = data_cleaning(df_tu_data_frame, new_columns=new_columns_dict)
+               
+    - new_columns2 (dict): Un diccionario donde las claves son los nombres de las nuevas columnas y los valores son expresiones
+                          para calcular el contenido de las nuevas columnas basadas en otras columnas existentes. 
+      Ejemplo: {'nueva_columna1': 'columna_existente * 2'}
+      cleaned_df = data_cleaning(df_tu_data_frame, new_columns2=new_columns_dict)
+
  
     - convert_date_columns (dict): Un diccionario donde las claves son los nombres de las columnas y los valores son los formatos de fecha.
       Ejemplo: date_columns_dict = {'fecha': '%Y-%m-%d', 'hora': '%H:%M:%S'}
@@ -222,13 +230,20 @@ def data_cleaning(df, drop_duplicates=False, drop_na=False, fill_na=None, conver
         for column, replacements in replace_values.items():
             cleaned_df[column].replace(replacements, inplace=True)
             
-
     # Agregar nuevas columnas
     if new_columns:
         for column, value in new_columns.items():
             cleaned_df[column] = value
- 
-
+            
+    # Agregar nuevas columnas basadas en otras columnas
+    if new_columns2:
+        for new_column, column_expr in new_columns2.items():
+            # Verificar si la expresión es proporcionada
+            if column_expr:
+                cleaned_df[new_column] = cleaned_df.eval(column_expr)
+            else:
+                cleaned_df[new_column] = None  # O cualquier valor predeterminado que prefieras
+                  
     # Convertir columnas de fecha con formato específico
     if convert_date_columns:
         for column, date_format in convert_date_columns.items():
@@ -248,4 +263,114 @@ def data_cleaning(df, drop_duplicates=False, drop_na=False, fill_na=None, conver
         
             
     return cleaned_df
+
+
+# In[ ]:
+
+
+import pandas as pd
+from sqlalchemy import create_engine
+import mysql.connector
+
+def create_mysql_db(csv_file_path, db_name, table_name, host='localhost', user='tu_usuario', password='tu_contraseña'):
+    """
+    Crea una base de datos MySQL y una tabla a partir de un archivo CSV.
+
+    Parameters:
+    - csv_file_path (str): Ruta del archivo CSV.
+    - db_name (str): Nombre de la base de datos a crear.
+    - table_name (str): Nombre de la tabla a crear.
+    - host (str, optional): Dirección del servidor MySQL. Por defecto, 'localhost'.
+    - user (str, optional): Usuario de MySQL. Por defecto, 'tu_usuario'.
+    - password (str, optional): Contraseña de MySQL. Por defecto, 'tu_contraseña'.
+
+    Returns:
+    None
+    """
+    try:
+        # Validaciones
+        if not csv_file_path.endswith('.csv'):
+            raise ValueError("El archivo debe tener extensión CSV.")
+
+        # Cargar CSV en un DataFrame
+        df = pd.read_csv(csv_file_path)
+        
+        # Conectar a MySQL y crear la base de datos si no existe
+        connection = mysql.connector.connect(
+            host=host,
+            user=user,
+            password=password
+        )
+        cursor = connection.cursor()
+        cursor.execute(f"CREATE DATABASE IF NOT EXISTS {db_name}")
+        cursor.close()
+        connection.close()
+
+        # Conectar a MySQL y crear la tabla si no existe
+        engine = create_engine(f'mysql+mysqlconnector://{user}:{password}@{host}:3306/{db_name}')
+        connection = engine.connect()
+        df.to_sql(table_name, connection, index=False, if_exists='replace')
+        connection.close()
+
+        print("Base de datos y tabla creadas exitosamente.")
+    except pd.errors.EmptyDataError:
+        raise ValueError("El archivo CSV está vacío.")
+    except mysql.connector.Error as err:
+        print(f"Error al conectar a MySQL: {err}")
+        raise
+    except Exception as e:
+        print(f"Error inesperado: {e}")
+        raise
+
+
+# In[ ]:
+
+
+'''
+def create_mysql_db(csv_file_path, db_name, table_name, host='localhost', user='tu_usuario', password='tu_contraseña'):
+    """
+    Crea una base de datos MySQL y una tabla a partir de un archivo CSV.
+
+    Parameters:
+    - csv_file_path (str): Ruta del archivo CSV.
+    - db_name (str): Nombre de la base de datos a crear.
+    - table_name (str): Nombre de la tabla a crear.
+    - host (str, optional): Dirección del servidor MySQL. Por defecto, 'localhost'.
+    - user (str, optional): Usuario de MySQL. Por defecto, 'tu_usuario'.
+    - password (str, optional): Contraseña de MySQL. Por defecto, 'tu_contraseña'.
+
+    Returns:
+    None
+    """
+
+    # Validaciones
+    if not csv_file_path.endswith('.csv'):
+        raise ValueError("El archivo debe tener extensión CSV.")
+
+    # Cargar CSV en un DataFrame
+    try:
+        df = pd.read_csv(csv_file_path)
+    except pd.errors.EmptyDataError:
+        raise ValueError("El archivo CSV está vacío.")
+
+    # Conectar a MySQL y crear la base de datos si no existe
+    connection = mysql.connector.connect(
+        host=host,
+        user=user,
+        password=password
+    )
+    cursor = connection.cursor()
+    cursor.execute(f"CREATE DATABASE IF NOT EXISTS {db_name}")
+    cursor.close()
+    connection.close()
+
+    # Conectar a MySQL y crear la tabla si no existe
+    engine = create_engine(f'mysql+mysqlconnector://{user}:{password}@{host}:3306/{db_name}')
+    connection = engine.connect()
+    df.to_sql(table_name, connection, index=False, if_exists='replace')
+    connection.close()
+
+# Llamar a la función
+#create_mysql_db('siniestros_viales.csv', 'nombre_de_tu_base_de_datos', 'nombre_de_tu_tabla')
+'''
 

@@ -1,2 +1,4 @@
-# Proyecto_Individual_2_DA
-Proyecto individual LABS Henry - Siniestros Viales - Rol: Data Analyst
+![Steam](https://github.com/JohannaRangel/Proyecto_Individual_2_DA/raw/main/assets/InfoSiniestrosViales.png)
+
+ejemplo, espero funciones
+XD

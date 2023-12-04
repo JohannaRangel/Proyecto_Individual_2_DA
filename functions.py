@@ -265,12 +265,8 @@ def data_cleaning(df, drop_duplicates=False, drop_na=False, fill_na=None, conver
     return cleaned_df
 
 
-# In[ ]:
+# In[1]:
 
-
-import pandas as pd
-from sqlalchemy import create_engine
-import mysql.connector
 
 def create_mysql_db(csv_file_path, db_name, table_name, host='localhost', user='tu_usuario', password='tu_contraseña'):
     """
@@ -326,51 +322,5 @@ def create_mysql_db(csv_file_path, db_name, table_name, host='localhost', user='
 # In[ ]:
 
 
-'''
-def create_mysql_db(csv_file_path, db_name, table_name, host='localhost', user='tu_usuario', password='tu_contraseña'):
-    """
-    Crea una base de datos MySQL y una tabla a partir de un archivo CSV.
 
-    Parameters:
-    - csv_file_path (str): Ruta del archivo CSV.
-    - db_name (str): Nombre de la base de datos a crear.
-    - table_name (str): Nombre de la tabla a crear.
-    - host (str, optional): Dirección del servidor MySQL. Por defecto, 'localhost'.
-    - user (str, optional): Usuario de MySQL. Por defecto, 'tu_usuario'.
-    - password (str, optional): Contraseña de MySQL. Por defecto, 'tu_contraseña'.
-
-    Returns:
-    None
-    """
-
-    # Validaciones
-    if not csv_file_path.endswith('.csv'):
-        raise ValueError("El archivo debe tener extensión CSV.")
-
-    # Cargar CSV en un DataFrame
-    try:
-        df = pd.read_csv(csv_file_path)
-    except pd.errors.EmptyDataError:
-        raise ValueError("El archivo CSV está vacío.")
-
-    # Conectar a MySQL y crear la base de datos si no existe
-    connection = mysql.connector.connect(
-        host=host,
-        user=user,
-        password=password
-    )
-    cursor = connection.cursor()
-    cursor.execute(f"CREATE DATABASE IF NOT EXISTS {db_name}")
-    cursor.close()
-    connection.close()
-
-    # Conectar a MySQL y crear la tabla si no existe
-    engine = create_engine(f'mysql+mysqlconnector://{user}:{password}@{host}:3306/{db_name}')
-    connection = engine.connect()
-    df.to_sql(table_name, connection, index=False, if_exists='replace')
-    connection.close()
-
-# Llamar a la función
-#create_mysql_db('siniestros_viales.csv', 'nombre_de_tu_base_de_datos', 'nombre_de_tu_tabla')
-'''
 

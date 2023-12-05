@@ -1,3 +1,0 @@
-
-ejemplo, espero funciones
-XD

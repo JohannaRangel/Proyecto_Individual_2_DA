@@ -8,6 +8,6 @@
 ![CABA](https://github.com/JohannaRangel/Proyecto_Individual_2_DA/raw/main/assets/7.png)
 ![CABA](https://github.com/JohannaRangel/Proyecto_Individual_2_DA/raw/main/assets/8.png)
 ![CABA](https://github.com/JohannaRangel/Proyecto_Individual_2_DA/raw/main/assets/9.png)
-
+![CABA](https://github.com/JohannaRangel/Proyecto_Individual_2_DA/raw/main/assets/10.png)
 ...espero funciones
 XD

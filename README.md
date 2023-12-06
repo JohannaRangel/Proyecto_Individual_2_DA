@@ -1,7 +1,6 @@
 ![CABA](https://github.com/JohannaRangel/Proyecto_Individual_2_DA/raw/main/assets/1.png)
 ![CABA](https://github.com/JohannaRangel/Proyecto_Individual_2_DA/raw/main/assets/2.png)
 ![CABA](https://github.com/JohannaRangel/Proyecto_Individual_2_DA/raw/main/assets/3.png)
-![CABA](https://github.com/JohannaRangel/Proyecto_Individual_2_DA/raw/main/assets/3.png)
 ![CABA](https://github.com/JohannaRangel/Proyecto_Individual_2_DA/raw/main/assets/4.png)
 ![CABA](https://github.com/JohannaRangel/Proyecto_Individual_2_DA/raw/main/assets/5.png)
 ![CABA](https://github.com/JohannaRangel/Proyecto_Individual_2_DA/raw/main/assets/6.png)

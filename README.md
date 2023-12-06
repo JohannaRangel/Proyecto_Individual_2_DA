@@ -20,7 +20,6 @@ Estructura del Repositorio
  *- EDA:* En éste archivo encontrarás todo el proceso de Analítica Predictiva y Prescriptiva de las diferentes variables de nuestro conjunto de datos.<br />
  *- KPI:* Acá encontrarás una especificación técnica del Indicador clave de desempeño para que tenga una idea más general de sus objetivos y particularidades.<br />
  *- functions:* De este libro generé una copia .py para que fuese ejecutable. Acá encontrarás una serie de funciones que regularmente usaba desde el ETL ó el EDA entonces lo convertí en un código reutilizable.<br />
-<br />
 
 **2. [/datasets](datasets/)** - Almacena los datasets fuentes y los resultantes despues del ETL y EDA, en una versión limpia y procesada.<br />
 *- homicidios y lesiones:* Archivo en formato xlsx. Son nuestra fuente de datos original.<br />
@@ -32,4 +31,9 @@ Estructura del Repositorio
 **4. [/dashboard](dashboard/):** - Acá encontrarás almacenado el dashboard SiniestrosViales de extensión .pbix.<br />
 
 **5. [/assets](assets/):** - Carpeta con imágenes y recursos utilizados durante el desarrollo del proyecto.<br />
+<br />
+## Autor <br />
+#### Johanna Rangel. <br />
+Para cualquier duda/sugerencia/recomendación/mejora respecto al proyecto con toda libertad puedes contactarme por [LinkedIn](https://bit.ly/3GigqhE)<br />
+
 

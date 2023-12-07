@@ -1,0 +1,60 @@
+BEGIN:VCALENDAR
+PRODID:-//Google Inc//Google Calendar 70.9054//EN
+VERSION:2.0
+CALSCALE:GREGORIAN
+METHOD:REQUEST
+BEGIN:VTIMEZONE
+TZID:America/Argentina/Cordoba
+X-LIC-LOCATION:America/Argentina/Cordoba
+BEGIN:STANDARD
+TZOFFSETFROM:-0300
+TZOFFSETTO:-0300
+TZNAME:-03
+DTSTART:19700101T000000
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+DTSTART;TZID=America/Argentina/Cordoba:20231207T143000
+DTEND;TZID=America/Argentina/Cordoba:20231207T150000
+DTSTAMP:20231206T211459Z
+ORGANIZER;CN=learning ops learning ops:mailto:learning-ops@soyhenry.com
+UID:srbbjb066nkttffpuce7633urk@google.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=
+ TRUE;CN=Francisco Negrete;X-NUM-GUESTS=0:mailto:fnegrete@soyhenry.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=
+ TRUE;CN=learning ops learning ops;X-NUM-GUESTS=0:mailto:learning-ops@soyhen
+ ry.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=
+ TRUE;CN=johannarangel14@gmail.com;X-NUM-GUESTS=0:mailto:johannarangel14@gma
+ il.com
+X-GOOGLE-CONFERENCE:https://meet.google.com/hbj-naxx-zob
+X-MICROSOFT-CDO-OWNERAPPTID:42995001
+CREATED:20231206T211458Z
+DESCRIPTION:Hola!\n    Te dejamos aquí un adelanto de la dinámica de la dem
+ o para que estés preparad@:\n    La corrección consta de 30 minutos.\n    2
+ -3 minutos para la coordinación inicial y repasar estos pasos.\n    10 minu
+ tos en donde presentarás tu dashboard interactivo\, los análisis que hicist
+ e y las conclusiones a las que llegaste.\n    En los minutos restantes tu c
+ orrector/a te hará algunas preguntas relacionadas al proyecto\, revisará tu
+  repositorio y te dará feedback sobre tu rendimiento en la presentación.\n 
+    El proyecto debe tener SI o SI\, todos los requerimientos mínimos de apr
+ obación planteados en el readme.\n    CONSEJO: Ten abierto tu dashboard y/o
+  presentación antes de la reunión y entra al meet 5 minutos antes.\n    En 
+ caso de no presentarse en el rango de 10 minutos\, la defensa se tomará com
+ o desaprobada sin posibilidad de reagendar.\n    ¡Te deseamos éxitos en tu 
+ presentación! ¡Recuerda que en esa presentación nadie sabe más que tú sobre
+  la temática del proyecto! :cohete:\n\n-::~:~::~:~:~:~:~:~:~:~:~:~:~:~:~:~:
+ ~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~::~:~::-\nJoin with Google Meet:
+  https://meet.google.com/hbj-naxx-zob\nOr dial: (AR) +54 11 3986-3700 PIN: 
+ 8381248377603#\nMore phone numbers: https://tel.meet/hbj-naxx-zob?pin=83812
+ 48377603&hs=7\n\nLearn more about Meet at: https://support.google.com/a/use
+ rs/answer/9282720\n\nPlease do not edit this section.\n-::~:~::~:~:~:~:~:~:
+ ~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~::~:~::-
+LAST-MODIFIED:20231206T211458Z
+LOCATION:
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Presentación PI DA Johanna Rangel
+TRANSP:OPAQUE
+END:VEVENT
+END:VCALENDAR

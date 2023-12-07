@@ -8,6 +8,7 @@
 ![CABA](https://github.com/JohannaRangel/Proyecto_Individual_2_DA/raw/main/assets/8.png)
 ![CABA](https://github.com/JohannaRangel/Proyecto_Individual_2_DA/raw/main/assets/9.png)
 ![CABA](https://github.com/JohannaRangel/Proyecto_Individual_2_DA/raw/main/assets/10.png)
+![CABA](https://github.com/JohannaRangel/Proyecto_Individual_2_DA/raw/main/assets/11.png)
 <br />
 
 
@@ -26,9 +27,9 @@ Estructura del Repositorio
 *- homicidios_cleaned y lesiones_cleaned:* Son los archivos resultantes de la limpieza del ETL, en formato csv.<br />
 *- siniestros_viales:* Archivo en formato csv donde se integran todos los datos de siniestros viales fatales y no fatales.<br />
 
-**3. [/sql_files](sql_files/):** - Aquí están los scripts .sql con los que generé dos consultas.<br />
+**3. [/sql_files](sql_files/):** - Se alojan los scripts .sql con los que generé dos consultas.<br />
 
-**4. [/dashboard](dashboard/):** - Acá encontrarás almacenado el dashboard SiniestrosViales de extensión .pbix.<br />
+**4. [/dashboard](dashboard/):** - Se encuentra almacenado el dashboard SiniestrosViales de extensión .pbix (desarrollado en Power Bi).<br />
 
 **5. [/assets](assets/):** - Carpeta con imágenes y recursos utilizados durante el desarrollo del proyecto.<br />
 <br />
